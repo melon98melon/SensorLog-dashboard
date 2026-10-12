@@ -3,16 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Medical Dashboard</title>
-    <link rel="stylesheet" href="styles.css" />
+    <title>GreenHouse | Sensor Log</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <!-- header with branding/title and active queue count -->
     <header class="portal-header">
       <div class="header-content">
         <div class="brand">
-          <span class="brand-icon">🩺</span>
-          <h1>PulseCare <span class="brand-sub">Triage Intake</span></h1>
+          <span class="brand-icon">&#129716;</span>
+          <h1>GreenHouse <span class="brand-sub"> Sensor Log</span></h1>
         </div>
         <div class="header-status">
           Active Queue: <span id="queue-count" class="badge-count">0</span>
@@ -22,7 +22,8 @@
 
     <!-- the main section with 2 containers: input and output -->
     <main class="portal-container">
-        <h2 class="panel-title">Record Patient Vitals</h2>
+      <aside class="panel form-panel">
+        <h2 class="panel-title">Record Sensor Data</h2>
         <!-- hidden element which fires if user gives out of bounds input -->
         <div
           id="form-error-banner"
@@ -30,65 +31,66 @@
           role="alert"
         ></div>
         <!-- form input -->
-        <form action="#" id="vitals-form" novalidate>
+        <form action="#" id="sensor-form" novalidate>
           <div class="form-group">
-            <label for="patient-name" class="form-label"
-              >Full Name <span class="required">*</span></label
+            <label for="plant-name" class="form-label"
+              >Sensor Name <span class="required">*</span></label
             >
             <input
               type="text"
-              name="patient-name"
-              id="patient-name"
+              name="plant-name"
+              id="plant-name"
               class="form-control"
-              placeholder="e.g. Eleanor Vance"
+              placeholder="e.g. Marigold"
               required
             />
           </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="systolic" class="form-label"
-                >Systolic BP (mmHg) <span class="required">*</span></label
-              >
-              <input
-                type="number"
-                name="systolic"
-                id="systolic"
-                class="form-control"
-                min="60"
-                max="260"
-                placeholder="120"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label for="diastolic" class="form-label"
-                >Diastolic BP (mmHg) <span class="required">*</span></label
-              >
-              <input
-                type="number"
-                name="diastolic"
-                id="diastolic"
-                class="form-control"
-                min="40"
-                max="150"
-                placeholder="80"
-                required
-              />
-            </div>
+          <div class="form-group">
+            <label for="ph" class="form-label"
+              >pH <span class="required">*</span></label
+            >
+            <input
+              type="number"
+              name="ph"
+              id="ph"
+              class="form-control"
+              min="0.0"
+              max="14.0"
+              step="0.1"
+              placeholder="6.0"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="conductivity" class="form-label"
+              >Electrical Conductivity (mS/cm)
+              <span class="required">*</span></label
+            >
+            <input
+              type="number"
+              name="conductivity"
+              id="conductivity"
+              class="form-control"
+              min="0"
+              max="3"
+              step="0.1"
+              placeholder="2.5"
+              required
+            />
           </div>
           <div class="form-row">
             <div class="form-group">
-              <label for="heart-rate" class="form-label"
-                >Pulse (bpm) <span class="required">*</span></label
+              <label for="temp" class="form-label"
+                >Air Temperature (F) <span class="required">*</span></label
               >
               <input
                 type="number"
-                name="heart-rate"
-                id="heart-rate"
+                name="temp"
+                id="temp"
                 class="form-control"
-                min="30"
-                max="240"
+                min="50.0"
+                max="90.0"
+                step="1.0"
                 placeholder="72"
                 required
               />
@@ -110,55 +112,57 @@
             </div>
           </div>
 
-          <div class="form-group">
-            <label for="temperature" class="form-label">
-              Temp (F) <span class="required">*</span></label
-            >
-            <input
-              type="number"
-              name="temperature"
-              id="temperature"
-              class="form-control"
-              min="90"
-              max="110"
-              placeholder="98.6"
-              step="0.1"
-              required
-            />
-          </div>
-
           <button
             type="submit"
             id="btn-submit"
             class="btn btn-primary btn-block"
           >
-            Log Vitals Record
+            Log Sensor Record
           </button>
         </form>
       </aside>
 
       <!-- Right container for output : DYNAMIC CONTENT injection -->
-      <section class="panel records-panel">
-        <div class="records-header">
-          <h2 class="panel-title">Triage Queue</h2>
-          <button id="btn-clear-all" class="btn btn-outline-danger btn-sm">
-            Purge Queue
-          </button>
+      <div class="record-info-container">
+        <div class="overview-container">
+          <article class="status-total-card">
+            <h3 class="card-title overview-title">Optimal:</h3>
+            <p class="status-total">0</p>
+          </article>
+          <article class="status-total-card">
+            <h3 class="card-title overview-title">Warning:</h3>
+            <span class="status-total">0</span>
+          </article>
+          <article class="status-total-card">
+            <h3 class="card-title overview-title">Critical Hazard:</h3>
+            <p class="status-total">0</p>
+          </article>
         </div>
 
-        <!-- create two states: 1. initial loading  2.state after the user interacts -->
-        <div id="empty-state" class="empty-state">
-          <span class="empty-icon">📋</span>
-          <p>No active triage records logged.</p>
-        </div>
-        <ul id="records-list" class="records-grid" aria-live="polite"></ul>
-      </section>
+        <section class="panel records-panel">
+          <div class="records-header">
+            <h2 class="panel-title">Triage Queue</h2>
+            <button id="btn-clear-all" class="btn btn-outline-danger btn-sm">
+              Purge Queue
+            </button>
+          </div>
+
+          <!-- create two states: 1. initial loading  2.state after the user interacts -->
+          <div id="empty-state" class="empty-state">
+            <span class="empty-icon">📋</span>
+            <p>No active triage records logged.</p>
+          </div>
+
+          <ul id="records-list" class="records-grid" aria-live="polite"></ul>
+        </section>
+      </div>
     </main>
 
     <footer class="portal-footer">
-      <p>&copy; 2026 CSI 3150 Dashboard Tutorial F2026.</p>
+      <p>&copy; 2026 CSI 3150 Greenhouse Sensor Logger F2026.</p>
     </footer>
 
+    <!-- integrate js file here before body closing tag -->
     <script src="app.js"></script>
   </body>
 </html>

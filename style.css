@@ -34,7 +34,7 @@ body {
   flex-direction: column;
 }
 
-/* HEADER */
+/*************** HEADER ***************/
 .portal-header {
   background-color: var(--bg-panel);
   border-bottom: 1px solid var(--border-color);
@@ -74,7 +74,7 @@ body {
   font-weight: 700;
 }
 
-/* LAYOUT GRID */
+/**************** LAYOUT GRID ****************/
 .portal-container {
   max-width: 1200px;
   margin: 2rem auto;
@@ -86,20 +86,35 @@ body {
   width: 100%;
 }
 
+.record-info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.overview-container {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
 .panel {
   background-color: var(--bg-panel);
   border: 1px solid var(--border-color);
   border-radius: var(--radius);
-  padding: 1.5rem;
+  padding: 2rem;
+  height: stretch;
 }
 
 .panel-title {
   font-size: 1.15rem;
   font-weight: 600;
-  margin-bottom: 1.25rem;
+  margin-bottom: 2.2rem;
+  text-align: center;
 }
 
-/* FORM CONTROLS */
+/**************** FORM CONTROLS ****************/
 .form-group {
   display: flex;
   flex-direction: column;
@@ -148,7 +163,7 @@ body {
   background-color: rgba(239, 68, 68, 0.05);
 }
 
-/* BUTTONS */
+/**************** BUTTONS ****************/
 .btn {
   display: inline-flex;
   align-items: center;
@@ -163,6 +178,8 @@ body {
 
 .btn-primary {
   background-color: var(--primary);
+  margin: 1.75rem 0rem 0rem 0rem;
+
   color: #fff;
 }
 
@@ -190,7 +207,7 @@ body {
   color: #fff;
 }
 
-/* ALERTS & EMPTY STATE */
+/**************** ALERTS & EMPTY STATE ****************/
 .alert {
   padding: 0.75rem 1rem;
   border-radius: 6px;
@@ -220,7 +237,7 @@ body {
   margin-bottom: 0.5rem;
 }
 
-/* RECORDS PANEL & DYNAMIC CARDS */
+/**************** RECORDS PANEL ****************/
 .records-header {
   display: flex;
   justify-content: space-between;
@@ -229,11 +246,37 @@ body {
 }
 
 .records-grid {
-  list-style: none;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1rem;
 }
+
+.portal-footer {
+  border-top: 1px solid var(--border-color);
+  padding: 1rem 2rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/**************** STATUS CARDS ****************/
+.status-total-card {
+  background-color: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  padding: 1.5rem;
+  border-radius: 8px;
+  transition: border-shadow var(--transition-speed);
+}
+.status-total-card:hover {
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.25);
+}
+.status-total .overview-title {
+  font-size: 1.3rem;
+  font-weight: 300;
+  inline-size: 0;
+}
+
+/**************** DYNAMIC CARDS ****************/
 
 .patient-card {
   background-color: var(--bg-card);
@@ -309,14 +352,6 @@ body {
   color: var(--text-muted);
   display: block;
   font-size: 0.75rem;
-}
-
-.portal-footer {
-  border-top: 1px solid var(--border-color);
-  padding: 1rem 2rem;
-  text-align: center;
-  font-size: 0.85rem;
-  color: var(--text-muted);
 }
 
 @media (max-width: 860px) {
