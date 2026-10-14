@@ -23,7 +23,7 @@
     <!-- the main section with 2 containers: input and output -->
     <main class="portal-container">
       <aside class="panel form-panel">
-        <h2 class="panel-title">Record Sensor Data</h2>
+        <h2 class="panel-title form-title">Record Sensor Data</h2>
         <!-- hidden element which fires if user gives out of bounds input -->
         <div
           id="form-error-banner"
@@ -33,13 +33,13 @@
         <!-- form input -->
         <form action="#" id="sensor-form" novalidate>
           <div class="form-group">
-            <label for="plant-name" class="form-label"
+            <label for="sensor-name" class="form-label"
               >Sensor Name <span class="required">*</span></label
             >
             <input
               type="text"
-              name="plant-name"
-              id="plant-name"
+              name="sensor-name"
+              id="sensor-name"
               class="form-control"
               placeholder="e.g. Marigold"
               required
@@ -125,17 +125,17 @@
       <!-- Right container for output : DYNAMIC CONTENT injection -->
       <div class="record-info-container">
         <div class="overview-container">
-          <article class="status-total-card">
+          <article class="status-total-card" id="overview-optimal">
             <h3 class="card-title overview-title">Optimal:</h3>
-            <p class="status-total">0</p>
+            <p class="status-total" id="optimal-total">0</p>
           </article>
-          <article class="status-total-card">
+          <article class="status-total-card" id="overview-warning">
             <h3 class="card-title overview-title">Warning:</h3>
-            <span class="status-total">0</span>
+            <span class="status-total" id="warning-total">0</span>
           </article>
-          <article class="status-total-card">
+          <article class="status-total-card" id="overview-critical">
             <h3 class="card-title overview-title">Critical Hazard:</h3>
-            <p class="status-total">0</p>
+            <p class="status-total" id="critical-total">0</p>
           </article>
         </div>
 

@@ -110,8 +110,11 @@ body {
 .panel-title {
   font-size: 1.15rem;
   font-weight: 600;
-  margin-bottom: 2.2rem;
   text-align: center;
+}
+
+.form-title {
+  margin-bottom: 2.2rem;
 }
 
 /**************** FORM CONTROLS ****************/
@@ -265,10 +268,7 @@ body {
   border: 1px solid var(--border-color);
   padding: 1.5rem;
   border-radius: 8px;
-  transition: border-shadow var(--transition-speed);
-}
-.status-total-card:hover {
-  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.25);
+  transition: border var(--transition-speed);
 }
 .status-total .overview-title {
   font-size: 1.3rem;
@@ -276,9 +276,21 @@ body {
   inline-size: 0;
 }
 
+#overview-optimal {
+  border: 1px solid var(--success);
+}
+
+#overview-warning {
+  border: 1px solid var(--warning);
+}
+
+#overview-critical {
+  border: 1px solid var(--danger);
+}
+
 /**************** DYNAMIC CARDS ****************/
 
-.patient-card {
+.sensor-card {
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
   border-left: 5px solid var(--border-color);
@@ -289,15 +301,15 @@ body {
   gap: 0.75rem;
 }
 
-.patient-card.status-critical {
+.sensor-card.status-critical {
   border-left-color: var(--danger);
 }
 
-.patient-card.status-elevated {
+.sensor-card.status-warning {
   border-left-color: var(--warning);
 }
 
-.patient-card.status-normal {
+.sensor-card.status-optimal {
   border-left-color: var(--success);
 }
 
@@ -307,7 +319,7 @@ body {
   align-items: flex-start;
 }
 
-.patient-name-text {
+.sensor-name-text {
   font-weight: 700;
   font-size: 1.05rem;
 }
@@ -329,16 +341,16 @@ body {
   background: var(--danger);
   color: #fff;
 }
-.risk-badge.elevated {
+.risk-badge.warning {
   background: var(--warning);
   color: #000;
 }
-.risk-badge.normal {
+.risk-badge.optimal {
   background: var(--success);
   color: #fff;
 }
 
-.vitals-stats {
+.data-stats {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem;
