@@ -56,10 +56,9 @@
 
   //   DOM RENDER FUNCTION BODY
   function render() {
+    //#region counters info
     queueCount.textContent = records.length;
 
-    //#region  this was newly imlemented. must check later if it works.
-    // side note: the levels should be nums not strings to avoid typos later or maybe a tuple?
     optimalTotal.textContent = records.filter(
       (p) => p.status.level == "optimal",
     ).length;
@@ -73,7 +72,7 @@
     ).length;
 
     //#endregion
-    console.log("records: " + Object.entries(records));
+
     if (records.length === 0) {
       emptyState.classList.remove("hidden");
       recordsList.innerHTML = "";
@@ -94,9 +93,11 @@
       // create dynamic card
       li.innerHTML = `
       <div class="card-top">
-            <div>
-                <div class="sensor-name-text">${escapeHtml(rec.name)} </div>
-                <div class="timestamp"> Logged at ${rec.timestamp} </div> 
+            <div class="card-header">
+                <div class="sensor-name-text">${escapeHtml(rec.name)} 
+                <p class="timestamp"> Logged at ${rec.timestamp} </p> 
+                </div>
+                
                 <span class="risk-badge ${rec.status.level}">${rec.status.label}</span>            
             </div>
 
@@ -121,8 +122,6 @@
 
   // procsesing logic - to create dynamic badges for classification
   function evaluateRisk(ph, ec, temp, rh) {
-    console.log("evaluating risk");
-
     if (
       (ph < 5 || ph > 7.5) &&
       (ec < 0.2 || ec > 4.5) &&
@@ -149,7 +148,6 @@
   // Input form validation:
   function validateInput(data) {
     const errors = [];
-    console.log("validating data.....");
 
     // start the error validation
     if (!data.name.trim()) {
@@ -169,7 +167,6 @@
     if (isNaN(data.rh) || data.rh < 20 || data.rh > 100) {
       errors.push("Relative Humidity must be a number and between 20 to 100 %");
     }
-    console.log("errors: " + errors);
 
     return errors;
   }
@@ -178,7 +175,6 @@
 
   sensorForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    console.log("form submited");
 
     const formData = {
       id: crypto.randomUUID(),
@@ -192,7 +188,6 @@
         minute: "2-digit",
       }),
     };
-    console.log("formData: " + formData);
 
     const validationErrors = validateInput(formData);
 
@@ -202,7 +197,6 @@
     }
 
     hideError();
-    console.log("formData BEFORE evaluate status level: " + formData.status);
 
     // classify risk level
     formData.status = evaluateRisk(
@@ -211,20 +205,20 @@
       formData.temp,
       formData.rh,
     );
-    console.log("formData AFTER evaluate status level: " + formData.status);
 
     records.unshift(formData);
-    console.log("records: " + records.value);
 
     // commit this to the memory
     saveRecords();
-    console.log("records: " + records);
 
     // reset the user form after data is committed to data store
     sensorForm.reset();
 
     // bring the input focus to the first input field
     inputName.focus();
+
+    //refresh record list UI
+    render();
   });
 
   recordsList.addEventListener("click", function (event) {
@@ -250,8 +244,6 @@
 
   // dynamically show error msg
   function displayError(message) {
-    console.log("displaying error banner");
-
     errorBanner.textContent = message;
     errorBanner.classList.remove("hidden");
   }
