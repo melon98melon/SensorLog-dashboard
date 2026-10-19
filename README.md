@@ -1,8 +1,8 @@
-# Greenhouse Telemetry Portal
+# Greenhouse Sensor Log Portal
 
 ## Overview
 
-The Greenhouse Telemetry Portal is a web application that allows greenhouse technicians to monitor and log environmental sensor data. The system validates sensor readings, classifies environmental conditions, stores entries locally in the browser, and provides tools for managing historical telemetry records.
+The Greenhouse Sensor Log Portal is a web application that allows greenhouse technicians to monitor and log environmental sensor data. The system validates sensor readings, classifies environmental conditions, stores entries locally in the browser, and provides tools for managing historical telemetry records.
 
 The portal is designed to help greenhouse staff quickly identify environmental problems and maintain an organized record of sensor measurements.
 
